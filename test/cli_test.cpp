@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
+
 #include <CLI/CLI.hpp>
+
 #include "amadeus/Version.h"
 
 TEST(VersionTest, VersionFormat) {
@@ -14,4 +16,4 @@ TEST(VersionTest, VersionFormat) {
     EXPECT_GE(dot_count, 2);
 }
 
-// Add more tests as needed 
+// Add more tests as needed
