@@ -11,6 +11,11 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
+        # Get version from environment or default to 0.0.1
+        version = builtins.getEnv "VERSION";
+        finalVersion = if version != "" then version else "0.0.1";
+
+        # Common build inputs for both dev and prod
         commonInputs = with pkgs; [
           cmake
           ninja
@@ -18,17 +23,20 @@
           gtest
         ];
 
+        # Development shell additional inputs
         devInputs = with pkgs; [
           clang-tools
           ccls
           gdb
           valgrind
+          git
         ];
 
       in {
+        # Default package (production build)
         packages.default = pkgs.stdenv.mkDerivation {
           pname = "amadeus-cli";
-          version = "0.0.1";
+          version = finalVersion;
           src = ./.;
 
           nativeBuildInputs = commonInputs;
@@ -52,6 +60,7 @@
           };
         };
 
+        # Development shell
         devShells.default = pkgs.mkShell {
           buildInputs = commonInputs ++ devInputs;
           
@@ -64,15 +73,38 @@
           '';
         };
 
-        apps.test = {
-          type = "app";
-          program = toString (pkgs.writeShellScript "run-tests" ''
-            if [ ! -d "build" ]; then
-              cmake -B build
-            fi
-            cmake --build build
-            ctest --test-dir build --output-on-failure
-          '');
+        # Apps
+        apps = {
+          # Default app
+          default = {
+            type = "app";
+            program = toString (pkgs.writeShellScript "run-amadeus-cli" ''
+              # Suppress output unless there's an error
+              if ! cmake -B build -DBUILD_TESTS=OFF > /dev/null 2>&1; then
+                echo "Build configuration failed"
+                exit 1
+              fi
+              
+              if ! cmake --build build > /dev/null 2>&1; then
+                echo "Build failed"
+                exit 1
+              fi
+              
+              ./build/bin/amadeus-cli "$@"
+            '');
+          };
+
+          # Test runner
+          test = {
+            type = "app";
+            program = toString (pkgs.writeShellScript "run-tests" ''
+              if [ ! -d "build" ]; then
+                cmake -B build
+              fi
+              cmake --build build
+              ctest --test-dir build --output-on-failure
+            '');
+          };
         };
       }
     );

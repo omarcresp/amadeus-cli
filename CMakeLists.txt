@@ -1,5 +1,25 @@
 cmake_minimum_required(VERSION 3.14)
-project(amadeus-cli VERSION 0.0.1 LANGUAGES CXX)
+
+# Include custom modules
+include(cmake/GitVersion.cmake)
+
+# Version handling
+set(VERSION_MAJOR 0)
+set(VERSION_MINOR 0)
+set(VERSION_PATCH 1)
+set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+
+# Try to get version from git if available
+get_git_version()
+if(DEFINED GIT_VERSION_FOUND AND GIT_VERSION_FOUND)
+    set(VERSION "${GIT_VERSION}")
+    set(VERSION_MAJOR "${GIT_VERSION_MAJOR}")
+    set(VERSION_MINOR "${GIT_VERSION_MINOR}")
+    set(VERSION_PATCH "${GIT_VERSION_PATCH}")
+endif()
+
+project(amadeus-cli VERSION ${VERSION} LANGUAGES CXX)
+message(STATUS "Configuring ${PROJECT_NAME} v${PROJECT_VERSION}")
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -26,10 +46,11 @@ if(NOT CLI11_FOUND)
     FetchContent_MakeAvailable(cli11)
 endif()
 
-# Set up versioning
+# Set up versioning - create version header from template
 configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Version.h.in
     ${CMAKE_CURRENT_SOURCE_DIR}/include/amadeus/Version.h
+    @ONLY
 )
 
 # Add subdirectories
