@@ -42,22 +42,53 @@ If you prefer not to use Nix, you can build and run the project directly. This m
 - Google Test framework (for testing)
 - Linux operating system
 - clang-format (for code formatting)
+- Just command runner (for simplified workflow)
 
 ### Installing Dependencies
 #### Ubuntu/Debian
 ```bash
 sudo apt update
 sudo apt install cmake build-essential libcli11-dev libgtest-dev clang-format
+# Install Just command runner
+curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
 ```
 
 #### Fedora
 ```bash
 sudo dnf install cmake gcc-c++ cli11-devel gtest-devel clang-tools-extra
+# Install Just command runner
+curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
 ```
 
 #### Arch Linux
 ```bash
-sudo pacman -S cmake base-devel cli11 gtest clang
+sudo pacman -S cmake base-devel cli11 gtest clang just
+```
+
+### Using Just Commands
+The project includes a justfile with common commands for development:
+
+```bash
+# List all available commands
+just
+
+# Build the project
+just build
+
+# Run tests
+just test
+
+# Format code
+just format
+
+# Check code formatting
+just format-check
+
+# Run the CLI
+just run
+
+# Install pre-commit hooks
+just hooks
 ```
 
 ### Building from Source

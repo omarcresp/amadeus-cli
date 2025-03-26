@@ -31,6 +31,7 @@
           valgrind
           git
           pre-commit
+          just
         ];
 
       in {
@@ -67,12 +68,14 @@
           
           shellHook = ''
             echo "Amadeus CLI Development Shell"
-            echo "Available commands:"
-            echo "  cmake -B build      # Configure the project"
-            echo "  cmake --build build # Build the project"
-            echo "  ctest --test-dir build # Run tests"
-            echo "  nix run .#format    # Format all code"
-            echo "  nix run .#format-check # Check formatting"
+            echo ""
+            echo "Available commands (run 'just --list' for more):"
+            echo "  just build         # Configure and build the project"
+            echo "  just test          # Run tests"
+            echo "  just run [args]    # Run the CLI tool"
+            echo "  just format        # Format code"
+            echo "  just check-format  # Check code formatting"
+            echo ""
             
             # Setup pre-commit hooks if not already installed
             if [ -z "$(ls -A .git/hooks)" ]; then
