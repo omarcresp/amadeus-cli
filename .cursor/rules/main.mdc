@@ -1,0 +1,115 @@
+---
+description: Main Agent rules to follow
+globs: 
+alwaysApply: true
+---
+# Unified Modern C++23 Development and Programming Guidelines
+
+## General Principles
+- Write enterprise-grade, production-ready code compliant with the modern C++23 standard.
+- Prioritize code safety, maintainability, readability, and robust performance.
+- Follow contemporary C++ idioms and focus on clarity and explicit intent.
+- Strictily adhere to the user instructions. DO NOT OVERDO
+- If user ask for things that may considered incomplete DO NOT complete them without confirmation. inform about the gap, maybe put placeholders/quick mocks in the code but never complete the implementations  without confirmation/explict being ask for
+
+## Language and Style Guidelines
+- **Code Language:** Write all code, comments, documentation, and commit messages in clear, professional English.
+- Strict adherence to the One-Definition Rule (ODR).
+- Ensure accurate spelling, preferring complete words over abbreviations, unless standard or widely-recognized abbreviations are justified (e.g., API, URL, config, err, ctx, req, res, idx, i/j/k loops).
+
+## Coding Standards
+
+### Naming Conventions
+- **Class and Struct Names:** PascalCase
+- **Variables, Functions, Methods:** camelCase, beginning functions with verbs (e.g., `loadConfiguration()`, `isComplete()`).
+- **Boolean Variables and Functions:** Use clear verb-based prefixes (`is`, `has`, `can`, etc.).
+- **Constants and Macros:** ALL_CAPS
+- **Files and Directories:** snake_case.cpp/hpp
+- **Environment Variables:** UPPERCASE
+- **Avoid Magic Numbers:** Define named constexpr or const values for clarity.
+
+### Functions
+- Maintain concise, targeted functions performing a single responsibility (ideally fewer than 20 instructions).
+- Explicitly declare all variable and function types.
+- Prioritize single level of abstraction by avoiding nested conditionals, loops, or deeply nested logic:
+  - Implement early returns for validation checks.
+  - Extract sub-tasks into clearly named utility/helper functions.
+- Leverage standard library algorithms and ranges instead of manual loops.
+- Use lambda functions for concise tasks; named functions for complex operations.
+- Avoid excessive parameters: consolidate related parameters or return values into structs/classes where beneficial.
+- Use default parameter values rather than manual checks for null.
+
+### Classes and Data Structures
+- Follow SOLID principles, especially Single Responsibility and Dependency Injection patterns.
+- Prefer composition over inheritance, avoiding deep or complex inheritance hierarchies.
+- Create small, explicit, and easily understandable classes (ideally under 200 instructions, fewer than 10 public methods, and minimal member variables).
+- Design types with internal validation encapsulated clearly within class boundaries (no external validation).
+- Prioritize immutability and const correctness:
+  - Mark non-mutating member functions `const`.
+  - Use `constexpr` for compile-time evaluation and static configuration variables.
+  - Prefer composite types and encapsulation to using primitive types directly.
+
+## Error and Exception Handling
+- Favor `std::expected<T,E>` and `std::optional<T>` for handling expected errors or nullable types explicitly.
+- Clearly annotate returned error-sensitive functions as `[[nodiscard]]`.
+- Provide human-readable, actionable error messages.
+- Use standard exceptions selectively for truly exceptional situations that indicate internal or unanticipated errors:
+  - Catch exceptions only to remediate or enrich context; otherwise, rely on global handlers.
+- Avoid implicit conversions and ambiguous return types.
+
+## Memory and Resource Management
+- Consistently employ smart pointers (`std::unique_ptr`, `std::shared_ptr`, and `std::weak_ptr`) instead of raw pointers for ownership semantics.
+- Adhere strictly to RAII principles for deterministic resource cleanup.
+- Explicit use of the Rule of Zero/Five for defining resource-managing objects.
+- Favor resizing-safe standard containers (`std::vector`, etc.) over plain arrays or manual allocations.
+
+## Modern C++23 Features
+- Prefer modern standard library features (e.g., ranges/views over manual loop constructions).
+- Use `std::print` and `std::println` instead of legacy streams (`std::cout`).
+- Enhance readability via structured bindings, `auto`, constexpr, and other language improvements where explicitly beneficial.
+- Utilize the standard library extensively (`std::filesystem`, `std::chrono`, `std::thread` entities, container and algorithm libraries).
+
+## Concurrency and Parallelism
+- Prioritize task-based concurrency (`std::async`, futures) over low-level thread management; explicitly manage threads where required using `std::thread`, `std::mutex`, `std::lock_guard`, and synchronization primitives.
+- Ensure thread-safe access to shared resources, prioritizing safe synchronization techniques (`std::atomic`, mutex locking).
+
+## Performance Optimization
+- Profile (measure) before optimizing prematurely.
+- Factor in cache locality and alignment when designing high-performance data structures.
+- Apply move semantics rigorously to handle large object copying efficiency.
+- Minimize unnecessary heap allocations within critical code paths.
+
+## Testing Practices
+- Employ automated test coverage via unit and integration tests for all modules and functionality.
+- Use clear test naming reflecting the Arrange-Act-Assert (AAA) or Given-When-Then conventions explicitly.
+- Standardize test variable naming patterns: `inputX`, `mockX`, `actualX`, `expectedX`.
+- Include necessary mock objects or test doubles to isolate units under test (unless third-party dependencies are inexpensive or quick to test directly).
+
+## Project and Filesystem Structure
+- Follow modular architecture with clearly delineated component boundaries.
+- Project directories shall be logically structured:
+  - `include/` for headers
+  - `src/` for implementation files
+  - `test/` for tests
+  - `lib/` for third-party or internal static/shared libraries
+  - `doc/` for additional documentation
+- Use modern build systems (CMake 3.x+, Conan, Makefile, or comparable systems):
+  - Clearly separate interfaces (.hpp) from implementations (.cpp).
+  - Maintain self-contained, minimal header files.
+  - Apply namespaces appropriately for logical and collision-free code organization:
+    - Core functionality: `namespace core`
+    - Utilities: `namespace utils`
+
+## Documentation
+- Write clear, Doxygen-style documentation for all publicly exposed APIs, classes, methods, namespaces, and critical implementation details.
+- Document the intention ("why") behind API/interfaces, avoiding trivial, self-evident comments on functionality ("what").
+- Include relevant and illustrative usage examples for non-trivial or complex APIs.
+- Keep documentation closely synchronized with code changes.
+
+## Version Control and Collaboration
+- Write small, focused commits featuring clear, descriptive, actionable commit messages.
+- Structure pull requests for clarity, containing narrowly scoped, logically cohesive changes.
+- Conduct initial self-review and peer-reviews systematically before merging to main branches.
+
+## Final Reminder
+Remember: quality code is read and reviewed more frequently than it is written. Prioritize readability, maintainability, explicitness, and clarity at all times. Always aim for excellence.
