@@ -9,6 +9,7 @@ cmake-build-*/
 .vscode/
 *.swp
 *.swo
+.ccls-cache/
 
 # Compiled Object files
 *.slo

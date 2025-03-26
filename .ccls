@@ -1,0 +1,5 @@
+%h -x
+%h c++-header
+%cpp -std=c++17
+-I/home/jackcres/Programming/technical-test/amadeus-cli/include
+-I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/cli11-src/include
