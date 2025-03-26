@@ -1,0 +1,18 @@
+repos:
+  - repo: local
+    hooks:
+      - id: clang-format
+        name: clang-format
+        description: Format C/C++ code using clang-format
+        entry: nix run .#format
+        language: system
+        types: [c++]
+        pass_filenames: false
+      
+      - id: clang-format-check
+        name: clang-format-check
+        description: Check C/C++ code formatting using clang-format
+        entry: nix run .#format-check
+        language: system
+        types: [c++]
+        pass_filenames: false 

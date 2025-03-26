@@ -31,7 +31,7 @@ If you have direnv installed, the development environment will be automatically 
 direnv allow
 ```
 
-## Traditional Setup
+## Traditional Linux Setup (Without Nix)
 
 If you prefer not to use Nix, you can build and run the project directly. This method requires manual installation of dependencies.
 
@@ -41,22 +41,23 @@ If you prefer not to use Nix, you can build and run the project directly. This m
 - CLI11 library
 - Google Test framework (for testing)
 - Linux operating system
+- clang-format (for code formatting)
 
 ### Installing Dependencies
 #### Ubuntu/Debian
 ```bash
 sudo apt update
-sudo apt install cmake build-essential libcli11-dev libgtest-dev
+sudo apt install cmake build-essential libcli11-dev libgtest-dev clang-format
 ```
 
 #### Fedora
 ```bash
-sudo dnf install cmake gcc-c++ cli11-devel gtest-devel
+sudo dnf install cmake gcc-c++ cli11-devel gtest-devel clang-tools-extra
 ```
 
 #### Arch Linux
 ```bash
-sudo pacman -S cmake base-devel cli11 gtest
+sudo pacman -S cmake base-devel cli11 gtest clang
 ```
 
 ### Building from Source
@@ -81,6 +82,35 @@ ctest --test-dir build --output-on-failure
 ```
 
 ## Development
+
+### Code Formatting
+
+This project uses clang-format for consistent code style. A configuration file (.clang-format) based on Google's C++ style guide with small modifications is included in the repository.
+
+### Format Code
+```bash
+# Using Nix (recommended)
+nix run .#format
+
+# Using clang-format directly
+clang-format -i -style=file $(find src include test -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
+```
+
+### Check Format
+```bash
+# Using Nix (recommended)
+nix run .#format-check
+
+# Using clang-format directly
+clang-format -n -Werror -style=file $(find src include test -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
+```
+
+### Pre-commit Hooks
+The project is configured with pre-commit hooks to ensure code is properly formatted before committing:
+```bash
+# Install pre-commit hooks (done automatically in nix shell)
+pre-commit install
+```
 
 ### Project Structure
 - `include/` - Header files

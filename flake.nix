@@ -30,6 +30,7 @@
           gdb
           valgrind
           git
+          pre-commit
         ];
 
       in {
@@ -70,6 +71,13 @@
             echo "  cmake -B build      # Configure the project"
             echo "  cmake --build build # Build the project"
             echo "  ctest --test-dir build # Run tests"
+            echo "  nix run .#format    # Format all code"
+            echo "  nix run .#format-check # Check formatting"
+            
+            # Setup pre-commit hooks if not already installed
+            if [ -z "$(ls -A .git/hooks)" ]; then
+              pre-commit install
+            fi
           '';
         };
 
@@ -103,6 +111,32 @@
               fi
               cmake --build build
               ctest --test-dir build --output-on-failure
+            '');
+          };
+          
+          # Format code
+          format = {
+            type = "app";
+            program = toString (pkgs.writeShellScript "format-code" ''
+              echo "Formatting all C++ code..."
+              find src include test -name "*.cpp" -o -name "*.h" -o -name "*.hpp" | xargs ${pkgs.clang-tools}/bin/clang-format -i -style=file
+              echo "Formatting complete."
+            '');
+          };
+          
+          # Check formatting
+          format-check = {
+            type = "app";
+            program = toString (pkgs.writeShellScript "check-format" ''
+              echo "Checking formatting of all C++ code..."
+              find src include test -name "*.cpp" -o -name "*.h" -o -name "*.hpp" | xargs ${pkgs.clang-tools}/bin/clang-format -n -Werror -style=file
+              if [ $? -eq 0 ]; then
+                echo "All files formatted correctly."
+                exit 0
+              else
+                echo "Some files need formatting. Run 'nix run .#format' to fix."
+                exit 1
+              fi
             '');
           };
         };
