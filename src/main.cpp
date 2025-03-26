@@ -34,12 +34,14 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    std::cout << "C++ version: " << __cplusplus << std::endl;
+
     if (options.print_avg) {
-        return handler->printAvg();
+        handler->printAvg();
     }
 
     if (options.print_highest) {
-        return handler->printMax();
+        handler->printMax();
     }
 
     if (!options.output_path.empty()) {

@@ -13,9 +13,9 @@ public:
 
     virtual int sortWrite(const std::string& outputPath) = 0;
 
-    virtual int printMax() = 0;
+    virtual void printMax() = 0;
 
-    virtual int printAvg() = 0;
+    virtual void printAvg() = 0;
 
     static DataHandler* createHandler(const std::string& filePath);
 };

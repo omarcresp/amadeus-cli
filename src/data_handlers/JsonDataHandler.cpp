@@ -10,6 +10,7 @@ JsonDataHandler::JsonDataHandler(const std::string& filePath) {
 
     m_employees = {Employee{"John Doe", 1, "Engineering", 75000.0}, Employee{"Jane Smith", 2, "HR", 65000.0},
                    Employee{"Bob Wilson", 3, "Marketing", 70000.0}};
+    m_totalSalaries = 210000.0;
 }
 
 JsonDataHandler::~JsonDataHandler() {}
@@ -21,16 +22,14 @@ int JsonDataHandler::sortWrite(const std::string& outputPath) {
     return 0;
 }
 
-int JsonDataHandler::printMax() {
+void JsonDataHandler::printMax() {
     std::cout << "JSON handler - printMax: pending to implement" << std::endl;
-
-    return 0;
 }
 
-int JsonDataHandler::printAvg() {
-    std::cout << "JSON handler - printAvg: pending to implement" << std::endl;
+void JsonDataHandler::printAvg() {
+    double avgSalary = m_totalSalaries / m_employees.size();
 
-    return 0;
+    std::cout << "Average salary: " << avgSalary << std::endl;
 }
 
 }  // namespace amadeus

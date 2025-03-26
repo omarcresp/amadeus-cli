@@ -15,12 +15,13 @@ public:
 
     int sortWrite(const std::string& outputPath) override;
 
-    int printMax() override;
+    void printMax() override;
 
-    int printAvg() override;
+    void printAvg() override;
 
 private:
     std::vector<Employee> m_employees;
+    double m_totalSalaries;
 };
 
 }  // namespace amadeus
