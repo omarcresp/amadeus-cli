@@ -1,5 +1,6 @@
 #include "amadeus/data_handlers/JsonDataHandler.hpp"
 
+#include <expected>
 #include <print>
 
 namespace amadeus {
@@ -16,11 +17,15 @@ JsonDataHandler::JsonDataHandler(const std::string& filePath) {
 
 JsonDataHandler::~JsonDataHandler() {}
 
-int JsonDataHandler::sortWrite(const std::string& outputPath) {
+std::expected<void, std::string> JsonDataHandler::sortWrite(const std::string& outputPath) {
+    if (outputPath.empty()) {
+        return std::unexpected("Error: outputPath is empty");
+    }
+
     std::println("\nJSON handler - sortWrite: pending to implement");
     std::print("Output path: {}", outputPath);
 
-    return 0;
+    return {};
 }
 
 void JsonDataHandler::printMax() {

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <expected>
 #include <string>
 #include <vector>
 
@@ -11,7 +12,7 @@ class DataHandler {
 public:
     virtual ~DataHandler() = default;
 
-    virtual int sortWrite(const std::string& outputPath) = 0;
+    virtual std::expected<void, std::string> sortWrite(const std::string& outputPath) = 0;
 
     virtual void printMax() = 0;
 

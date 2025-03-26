@@ -1,5 +1,6 @@
 #pragma once
 
+#include <expected>
 #include <string>
 #include <vector>
 
@@ -13,7 +14,7 @@ public:
     explicit JsonDataHandler(const std::string& filePath);
     ~JsonDataHandler() override;
 
-    int sortWrite(const std::string& outputPath) override;
+    std::expected<void, std::string> sortWrite(const std::string& outputPath) override;
 
     void printMax() override;
 

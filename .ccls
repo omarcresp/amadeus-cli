@@ -1,7 +1,17 @@
-clang
-
-%cxx -std=c++23
-%cxx -stdlib=libc++
+%clang
+%c -std=c23
+%cpp -std=c++23
+%cpp -stdlib=libstdc++
+%cpp -D_GLIBCXX_HAVE_EXPECTED=1
+%cpp -D__cpp_lib_expected=202202L
+%h -x
+%h c++-header
+%h -std=c++23
 
 -I/home/jackcres/Programming/technical-test/amadeus-cli/include
 -I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/cli11-src/include
+
+-Wall
+-Wextra
+-Wpedantic
+-Werror

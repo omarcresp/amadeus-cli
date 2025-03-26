@@ -16,11 +16,15 @@ XmlDataHandler::XmlDataHandler(const std::string& filePath) {
 
 XmlDataHandler::~XmlDataHandler() {}
 
-int XmlDataHandler::sortWrite(const std::string& outputPath) {
+std::expected<void, std::string> XmlDataHandler::sortWrite(const std::string& outputPath) {
+    if (outputPath.empty()) {
+        return std::unexpected("Error: outputPath is empty");
+    }
+
     std::println("\nXML handler - sortWrite: pending to implement");
     std::print("Output path: {}", outputPath);
 
-    return 0;
+    return {};
 }
 
 void XmlDataHandler::printMax() {
