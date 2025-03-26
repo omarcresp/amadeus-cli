@@ -1,0 +1,67 @@
+# Modern C++23 Development Guidelines
+
+## Core Principles
+- Write production-ready, enterprise-scale C++23 code
+- Prioritize safety, maintainability, and performance
+- Follow modern C++ idioms and best practices
+
+## Code Standards
+
+### Error Handling
+- Use `std::expected<T, E>` for error handling over exceptions where appropriate
+- Annotate functions that return values requiring error checking with `[[nodiscard]]`
+- Provide clear, actionable error messages
+
+### Memory Management
+- Prefer smart pointers (`std::unique_ptr`, `std::shared_ptr`) over raw pointers
+- Use RAII principles for resource management
+- Avoid manual memory management unless absolutely necessary
+
+### Modern Features
+- Utilize C++23 features when they improve code clarity or safety
+- Prefer ranges and views over raw loops
+- Prefer `std::print` and `std::println` over cout
+- Use structured bindings and `auto` where it enhances readability
+
+### Code Organization
+- Follow the single responsibility principle
+- Follow modular approaches always considering horizontal scalability
+- Keep header files minimal and self-contained
+- Use namespaces to prevent naming collisions
+- Organize related functionality into cohesive modules
+
+## Best Practices
+
+### Do
+- Write self-documenting code with meaningful names
+- Use const-correctness consistently
+- Validate inputs at API boundaries
+- Write unit tests for new functionality
+- Document public APIs with clear contracts
+
+### Avoid
+- Raw pointer ownership
+- Implicit conversions
+- Global state
+- Magic numbers
+- Deep inheritance hierarchies
+
+## Performance Considerations
+- Profile before optimizing
+- Consider cache coherency in data structures
+- Use move semantics for large objects
+- Minimize allocations in critical paths
+
+## Documentation
+- Document the "why" not the "what"
+- Keep documentation close to the code
+- Update documentation when changing interfaces
+- Include examples for COMPLEX functionality
+
+## Version Control
+- Write clear, atomic commits
+- Use descriptive commit messages
+- Keep pull requests focused and manageable
+- Review code before merging
+
+Remember: Code is read more often than it is written. Optimize for readability and maintainability first.
