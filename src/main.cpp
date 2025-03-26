@@ -1,13 +1,24 @@
 #include <CLI/CLI.hpp>
 #include <iostream>
+#include <string>
 
+#include "amadeus/CliOptions.hpp"
 #include "amadeus/Version.h"
 
-int main(int argc, char** argv) {
-    CLI::App app{"Amadeus CLI Tool"};
+using std::string;
 
-    bool show_version = false;
-    app.add_flag("-v,--version", show_version, "Print version information and exit");
+int main(int argc, char** argv) {
+    CLI::App app{"Amadeus CLI Tool\nAnalyzes employees datasource to output data analysis\n"};
+
+    app.add_flag_function(
+        "-v,--version",
+        [](int) {
+            std::cout << amadeus::VERSION << std::endl;
+            std::exit(0);
+        },
+        "Print version information and exit");
+
+    amadeus::CliOptions options = amadeus::CliValidator::configure_cli_options(app);
 
     try {
         app.parse(argc, argv);
@@ -15,13 +26,10 @@ int main(int argc, char** argv) {
         return app.exit(e);
     }
 
-    if (show_version) {
-        std::cout << amadeus::VERSION << std::endl;
-        return 0;
-    }
-
     // Default action
-    std::cout << "Hello, World!" << std::endl;
+    std::cout << "Input file: " << options.file_path << std::endl;
+    std::cout << "Output file: " << options.output_path << std::endl;
+    std::cout << "Output format: " << options.output_format << std::endl;
 
     return 0;
 }
