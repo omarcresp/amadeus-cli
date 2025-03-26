@@ -5,30 +5,32 @@
 namespace amadeus {
 
 JsonDataHandler::JsonDataHandler(const std::string& filePath) {
-    std::cout << "JSON handler constructed with file: " << filePath
-              << " - pending to implement loading." << std::endl;
-    // TODO: Load employees from JSON file
+    // TODO: Implement loading from the JSON file
+    (void)filePath;
+
+    m_employees = {Employee{"John Doe", 1, "Engineering", 75000.0}, Employee{"Jane Smith", 2, "HR", 65000.0},
+                   Employee{"Bob Wilson", 3, "Marketing", 70000.0}};
 }
 
 JsonDataHandler::~JsonDataHandler() {}
 
-bool JsonDataHandler::sortWrite(const std::string& outputPath) {
+int JsonDataHandler::sortWrite(const std::string& outputPath) {
     std::cout << "JSON handler - sortWrite: pending to implement" << std::endl;
     std::cout << "Output path: " << outputPath << std::endl;
-    return true;
+
+    return 0;
 }
 
-void JsonDataHandler::printMax() {
+int JsonDataHandler::printMax() {
     std::cout << "JSON handler - printMax: pending to implement" << std::endl;
+
+    return 0;
 }
 
-void JsonDataHandler::printAvg() {
+int JsonDataHandler::printAvg() {
     std::cout << "JSON handler - printAvg: pending to implement" << std::endl;
-}
 
-const std::vector<Employee>& JsonDataHandler::getEmployees() const {
-    std::cout << "JSON handler - getEmployees: pending to implement" << std::endl;
-    return m_employees;
+    return 0;
 }
 
 }  // namespace amadeus

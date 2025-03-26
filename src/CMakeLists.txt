@@ -1,6 +1,5 @@
 add_executable(amadeus-cli
     main.cpp
-    Employee.cpp
     data_handlers/DataHandler.cpp
     data_handlers/XmlDataHandler.cpp
     data_handlers/JsonDataHandler.cpp

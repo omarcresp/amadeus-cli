@@ -7,12 +7,14 @@
 
 #include "amadeus/Constants.hpp"
 
+using string = std::string;
+
 namespace amadeus {
 
 struct CliOptions {
-    std::string file_path;
-    std::string output_path;
-    std::string output_format;
+    string file_path;
+    string output_path;
+    string output_format;
     bool print_avg = false;
     bool print_highest = false;
 };
@@ -29,24 +31,32 @@ public:
 
         app.add_option("-o,--output", options.output_path, "Output file path")->check(ValidPath);
 
-        app.add_option(
-               "-f,--format", options.output_format,
-               "Output format (" + amadeus::join_formats(amadeus::ALLOWED_FILE_FORMATS) + ")")
-            ->check(CLI::IsMember(amadeus::ALLOWED_FILE_FORMATS));
-
         app.add_flag("-a,--average", options.print_avg, "Print average salary to stdout");
-        app.add_flag("-m,--max", options.print_highest,
-                     "Print highest paid employee details to stdout");
+        app.add_flag("-m,--max", options.print_highest, "Print highest paid employee details to stdout");
+
+        app.callback([&options]() {
+            if (options.output_path.empty()) {
+                options.output_path = get_default_output_path(options.file_path);
+            }
+        });
 
         return options;
     }
 
 private:
     static const CLI::Validator ValidPath;
+    static const string get_default_output_path(const string& file_path);
 };
 
-const CLI::Validator CliValidator::ValidPath = CLI::Validator(
-    [](const std::string& path) -> std::string {
+inline const string CliValidator::get_default_output_path(const string& file_path) {
+    std::filesystem::path input_path(file_path);
+
+    return (input_path.parent_path() / (input_path.stem().string() + ".result" + input_path.extension().string()))
+        .string();
+}
+
+inline const CLI::Validator CliValidator::ValidPath = CLI::Validator(
+    [](const string& path) -> string {
         if (!std::filesystem::exists(std::filesystem::path(path).parent_path())) {
             return "Parent directory does not exist";
         }

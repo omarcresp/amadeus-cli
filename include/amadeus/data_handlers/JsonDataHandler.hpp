@@ -13,17 +13,11 @@ public:
     explicit JsonDataHandler(const std::string& filePath);
     ~JsonDataHandler() override;
 
-    // Sort employees by ID and write to output file
-    bool sortWrite(const std::string& outputPath) override;
+    int sortWrite(const std::string& outputPath) override;
 
-    // Print highest paid employee
-    void printMax() override;
+    int printMax() override;
 
-    // Print average salary
-    void printAvg() override;
-
-    // Get employees data
-    const std::vector<Employee>& getEmployees() const override;
+    int printAvg() override;
 
 private:
     std::vector<Employee> m_employees;

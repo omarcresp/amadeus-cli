@@ -28,32 +28,20 @@ int main(int argc, char** argv) {
         return app.exit(e);
     }
 
-    // Create appropriate data handler based on input file
-    std::unique_ptr<amadeus::DataHandler> handler(
-        amadeus::DataHandler::createHandler(options.file_path));
+    std::unique_ptr<amadeus::DataHandler> handler(amadeus::DataHandler::createHandler(options.file_path));
 
     if (!handler) {
-        std::cerr << "Failed to create data handler for file: " << options.file_path << std::endl;
         return 1;
     }
 
-    // Initialize handler with input file
-    if (!handler->initialize(options.file_path)) {
-        std::cerr << "Failed to initialize data handler with file: " << options.file_path
-                  << std::endl;
-        return 1;
-    }
-
-    // Process according to options
     if (options.print_avg) {
-        handler->printAvg();
+        return handler->printAvg();
     }
 
     if (options.print_highest) {
-        handler->printMax();
+        return handler->printMax();
     }
 
-    // Write sorted output if output path is specified
     if (!options.output_path.empty()) {
         if (!handler->sortWrite(options.output_path)) {
             std::cerr << "Failed to write output to: " << options.output_path << std::endl;

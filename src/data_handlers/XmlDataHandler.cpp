@@ -5,30 +5,32 @@
 namespace amadeus {
 
 XmlDataHandler::XmlDataHandler(const std::string& filePath) {
-    std::cout << "XML handler constructed with file: " << filePath
-              << " - pending to implement loading." << std::endl;
-    // TODO: Load employees from XML file
+    // TODO: Implement loading from the XML file
+    (void)filePath;
+
+    m_employees = {Employee{"John Doe", 1, "Engineering", 75000.0}, Employee{"Jane Smith", 2, "HR", 65000.0},
+                   Employee{"Bob Wilson", 3, "Marketing", 70000.0}};
 }
 
 XmlDataHandler::~XmlDataHandler() {}
 
-bool XmlDataHandler::sortWrite(const std::string& outputPath) {
+int XmlDataHandler::sortWrite(const std::string& outputPath) {
     std::cout << "XML handler - sortWrite: pending to implement" << std::endl;
     std::cout << "Output path: " << outputPath << std::endl;
+
     return true;
 }
 
-void XmlDataHandler::printMax() {
+int XmlDataHandler::printMax() {
     std::cout << "XML handler - printMax: pending to implement" << std::endl;
+
+    return 0;
 }
 
-void XmlDataHandler::printAvg() {
+int XmlDataHandler::printAvg() {
     std::cout << "XML handler - printAvg: pending to implement" << std::endl;
-}
 
-const std::vector<Employee>& XmlDataHandler::getEmployees() const {
-    std::cout << "XML handler - getEmployees: pending to implement" << std::endl;
-    return m_employees;
+    return 0;
 }
 
 }  // namespace amadeus

@@ -65,7 +65,7 @@
         # Development shell
         devShells.default = pkgs.mkShell {
           buildInputs = commonInputs ++ devInputs;
-          
+
           shellHook = ''
             echo "Amadeus CLI Development Shell"
             echo ""
@@ -76,7 +76,7 @@
             echo "  just format        # Format code"
             echo "  just check-format  # Check code formatting"
             echo ""
-            
+
             # Setup pre-commit hooks if not already installed
             if [ -z "$(ls -A .git/hooks)" ]; then
               pre-commit install
@@ -95,12 +95,12 @@
                 echo "Build configuration failed"
                 exit 1
               fi
-              
+
               if ! cmake --build build > /dev/null 2>&1; then
                 echo "Build failed"
                 exit 1
               fi
-              
+
               ./build/bin/amadeus-cli "$@"
             '');
           };
@@ -116,7 +116,7 @@
               ctest --test-dir build --output-on-failure
             '');
           };
-          
+
           # Format code
           format = {
             type = "app";
@@ -126,7 +126,7 @@
               echo "Formatting complete."
             '');
           };
-          
+
           # Check formatting
           format-check = {
             type = "app";
@@ -145,4 +145,4 @@
         };
       }
     );
-} 
+}
