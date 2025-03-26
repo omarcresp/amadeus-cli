@@ -12,7 +12,7 @@ class DataHandler {
 public:
     virtual ~DataHandler() = default;
 
-    virtual std::expected<void, std::string> sortWrite(const std::string& outputPath) = 0;
+    [[nodiscard]] virtual std::expected<void, std::string> sortWrite(const std::string& outputPath) = 0;
 
     virtual void printMax() = 0;
 

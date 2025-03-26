@@ -17,11 +17,11 @@ DataHandler* DataHandler::createHandler(const std::string& filePath) {
     }
 
     if (extension == "xml") {
-        return new amadeus::XmlDataHandler(path);
+        return new XmlDataHandler(path);
     }
 
     if (extension == "json") {
-        return new amadeus::JsonDataHandler(path);
+        return new JsonDataHandler(path);
     }
 
     std::println(stderr, "Unsupported file type: {}", extension);

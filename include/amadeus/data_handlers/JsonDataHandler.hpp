@@ -14,7 +14,7 @@ public:
     explicit JsonDataHandler(const std::string& filePath);
     ~JsonDataHandler() override;
 
-    std::expected<void, std::string> sortWrite(const std::string& outputPath) override;
+    [[nodiscard]] std::expected<void, std::string> sortWrite(const std::string& outputPath) override;
 
     void printMax() override;
 

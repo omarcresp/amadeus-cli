@@ -1,5 +1,6 @@
 #include "amadeus/data_handlers/XmlDataHandler.hpp"
 
+#include <expected>
 #include <print>
 
 namespace amadeus {

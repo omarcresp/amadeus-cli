@@ -42,8 +42,10 @@ int main(int argc, char** argv) {
         handler->printMax();
     }
 
-    if (handler->sortWrite(options.output_path)) {
-        std::println(stderr, "Failed to write output to: {}", options.output_path);
+    auto writeResult = handler->sortWrite(options.output_path);
+
+    if (!writeResult.error().empty()) {
+        std::println(stderr, "{}", writeResult.error());
 
         return 1;
     }
