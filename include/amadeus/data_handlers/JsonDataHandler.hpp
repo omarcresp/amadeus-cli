@@ -22,6 +22,7 @@ public:
 private:
     std::vector<Employee> m_employees;
     double m_totalSalaries;
+    Employee m_highestIncome;
 };
 
 }  // namespace amadeus
