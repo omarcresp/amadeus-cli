@@ -1,6 +1,6 @@
 #include <CLI/CLI.hpp>
-#include <iostream>
 #include <memory>
+#include <print>
 #include <string>
 
 #include "amadeus/CliOptions.hpp"
@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
     app.add_flag_function(
         "-v,--version",
         [](int) {
-            std::cout << amadeus::VERSION << std::endl;
+            std::println("{}", amadeus::VERSION);
             std::exit(0);
         },
         "Print version information and exit");
@@ -34,8 +34,6 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    std::cout << "C++ version: " << __cplusplus << std::endl;
-
     if (options.print_avg) {
         handler->printAvg();
     }
@@ -44,11 +42,10 @@ int main(int argc, char** argv) {
         handler->printMax();
     }
 
-    if (!options.output_path.empty()) {
-        if (!handler->sortWrite(options.output_path)) {
-            std::cerr << "Failed to write output to: " << options.output_path << std::endl;
-            return 1;
-        }
+    if (handler->sortWrite(options.output_path)) {
+        std::println(stderr, "Failed to write output to: {}", options.output_path);
+
+        return 1;
     }
 
     return 0;

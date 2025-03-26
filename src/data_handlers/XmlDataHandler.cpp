@@ -1,6 +1,6 @@
 #include "amadeus/data_handlers/XmlDataHandler.hpp"
 
-#include <iostream>
+#include <print>
 
 namespace amadeus {
 
@@ -17,26 +17,25 @@ XmlDataHandler::XmlDataHandler(const std::string& filePath) {
 XmlDataHandler::~XmlDataHandler() {}
 
 int XmlDataHandler::sortWrite(const std::string& outputPath) {
-    std::cout << "XML handler - sortWrite: pending to implement" << std::endl;
-    std::cout << "Output path: " << outputPath << std::endl;
+    std::println("\nXML handler - sortWrite: pending to implement");
+    std::print("Output path: {}", outputPath);
 
-    return true;
+    return 0;
 }
 
 void XmlDataHandler::printMax() {
     // Assert highestIncome field is defined
 
-    std::cout << "Higher income employe:" << std::endl;
-    std::cout << "ID: " << m_highestIncome.id << std::endl;
-    std::cout << "Name: " << m_highestIncome.name << std::endl;
-    std::cout << "Department: " << m_highestIncome.department << std::endl;
-    std::cout << "Salary: " << m_highestIncome.salary << std::endl;
+    std::println("Higher income employee");
+    std::println("ID: {}", m_highestIncome.id);
+    std::println("Name: {}", m_highestIncome.name);
+    std::println("Department: {}", m_highestIncome.department);
+    std::println("Salary: {}", m_highestIncome.salary);
 }
 
 void XmlDataHandler::printAvg() {
     double avgSalary = m_totalSalaries / m_employees.size();
-
-    std::cout << "Average salary: " << avgSalary << std::endl;
+    std::println("Average salary: {}\n", avgSalary);
 }
 
 }  // namespace amadeus

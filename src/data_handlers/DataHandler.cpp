@@ -1,7 +1,7 @@
 #include "amadeus/data_handlers/DataHandler.hpp"
 
 #include <filesystem>
-#include <iostream>
+#include <print>
 
 #include "amadeus/data_handlers/JsonDataHandler.hpp"
 #include "amadeus/data_handlers/XmlDataHandler.hpp"
@@ -24,7 +24,7 @@ DataHandler* DataHandler::createHandler(const std::string& filePath) {
         return new amadeus::JsonDataHandler(path);
     }
 
-    std::cerr << "Unsupported file type: " << extension << std::endl;
+    std::println(stderr, "Unsupported file type: {}", extension);
 
     return nullptr;
 }

@@ -1,6 +1,6 @@
 #include "amadeus/data_handlers/JsonDataHandler.hpp"
 
-#include <iostream>
+#include <print>
 
 namespace amadeus {
 
@@ -17,8 +17,8 @@ JsonDataHandler::JsonDataHandler(const std::string& filePath) {
 JsonDataHandler::~JsonDataHandler() {}
 
 int JsonDataHandler::sortWrite(const std::string& outputPath) {
-    std::cout << "JSON handler - sortWrite: pending to implement" << std::endl;
-    std::cout << "Output path: " << outputPath << std::endl;
+    std::println("\nJSON handler - sortWrite: pending to implement");
+    std::print("Output path: {}", outputPath);
 
     return 0;
 }
@@ -26,17 +26,16 @@ int JsonDataHandler::sortWrite(const std::string& outputPath) {
 void JsonDataHandler::printMax() {
     // Assert highestIncome field is defined
 
-    std::cout << "Higher income employe:" << std::endl;
-    std::cout << "ID: " << m_highestIncome.id << std::endl;
-    std::cout << "Name: " << m_highestIncome.name << std::endl;
-    std::cout << "Department: " << m_highestIncome.department << std::endl;
-    std::cout << "Salary: " << m_highestIncome.salary << std::endl;
+    std::println("Higher income employee");
+    std::println("ID: {}", m_highestIncome.id);
+    std::println("Name: {}", m_highestIncome.name);
+    std::println("Department: {}", m_highestIncome.department);
+    std::println("Salary: {}", m_highestIncome.salary);
 }
 
 void JsonDataHandler::printAvg() {
     double avgSalary = m_totalSalaries / m_employees.size();
-
-    std::cout << "Average salary: " << avgSalary << std::endl;
+    std::println("Average salary: {}\n", avgSalary);
 }
 
 }  // namespace amadeus
