@@ -19,7 +19,6 @@
         commonInputs = with pkgs; [
           cmake
           ninja
-          cli11
           gtest
         ];
 
