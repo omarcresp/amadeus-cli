@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/src",
+  "command": "/etc/profiles/per-user/jackcres/bin/c++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -isystem /nix/store/3gfx040lcywpih8c22x3979vwy8xmq2i-cli11-2.4.2/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/main.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/main.cpp",
+  "file": "/home/jackcres/Programming/technical-test/amadeus-cli/src/main.cpp",
+  "output": "src/CMakeFiles/amadeus-cli.dir/main.cpp.o"
+},
+{
+  "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/src",
+  "command": "/etc/profiles/per-user/jackcres/bin/c++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -isystem /nix/store/3gfx040lcywpih8c22x3979vwy8xmq2i-cli11-2.4.2/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/data_handlers/DataHandler.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/DataHandler.cpp",
+  "file": "/home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/DataHandler.cpp",
+  "output": "src/CMakeFiles/amadeus-cli.dir/data_handlers/DataHandler.cpp.o"
+},
+{
+  "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/src",
+  "command": "/etc/profiles/per-user/jackcres/bin/c++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -isystem /nix/store/3gfx040lcywpih8c22x3979vwy8xmq2i-cli11-2.4.2/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/data_handlers/XmlDataHandler.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/XmlDataHandler.cpp",
+  "file": "/home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/XmlDataHandler.cpp",
+  "output": "src/CMakeFiles/amadeus-cli.dir/data_handlers/XmlDataHandler.cpp.o"
+},
+{
+  "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/src",
+  "command": "/etc/profiles/per-user/jackcres/bin/c++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -isystem /nix/store/3gfx040lcywpih8c22x3979vwy8xmq2i-cli11-2.4.2/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/data_handlers/JsonDataHandler.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/JsonDataHandler.cpp",
+  "file": "/home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/JsonDataHandler.cpp",
+  "output": "src/CMakeFiles/amadeus-cli.dir/data_handlers/JsonDataHandler.cpp.o"
+}
+]
