@@ -25,7 +25,6 @@
         # Development shell additional inputs
         devInputs = with pkgs; [
           clang-tools
-          ccls
           gdb
           valgrind
           git
