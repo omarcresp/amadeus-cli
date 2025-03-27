@@ -12,7 +12,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         # Get version from environment or default to 0.0.1
-        version = "1.0.0";
+        version = "1.0.1";
 
         # Common build inputs for both dev and prod
         commonInputs = with pkgs; [
