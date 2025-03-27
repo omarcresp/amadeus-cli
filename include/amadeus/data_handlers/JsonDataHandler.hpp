@@ -13,6 +13,8 @@ namespace amadeus {
 
 class JsonDataHandler : public DataHandler {
 public:
+    explicit JsonDataHandler(const nlohmann::json& jsonData);
+
     ~JsonDataHandler() override;
 
     [[nodiscard]] static std::expected<std::unique_ptr<DataHandler>, string> create(const string& filePath);
@@ -24,8 +26,6 @@ public:
     void printAvg() override;
 
 private:
-    explicit JsonDataHandler(const nlohmann::json& jsonData);
-
     std::vector<Employee> m_employees;
     double m_totalSalaries;
     Employee m_highestIncome;

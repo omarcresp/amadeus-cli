@@ -44,10 +44,10 @@ public:
 
 private:
     static const CLI::Validator ValidPath;
-    static const string get_default_output_path(const string& file_path);
+    static string get_default_output_path(const string& file_path);
 };
 
-inline const string CliValidator::get_default_output_path(const string& file_path) {
+inline string CliValidator::get_default_output_path(const string& file_path) {
     std::filesystem::path input_path(file_path);
 
     return (input_path.parent_path() / (input_path.stem().string() + ".result" + input_path.extension().string()))

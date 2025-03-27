@@ -15,6 +15,8 @@ namespace amadeus {
 
 class XmlDataHandler : public DataHandler {
 public:
+    explicit XmlDataHandler(const pugi::xml_document& doc);
+
     ~XmlDataHandler() override;
 
     [[nodiscard]] std::expected<void, string> sortWrite(const string& outputPath) override;
@@ -26,8 +28,6 @@ public:
     [[nodiscard]] static std::expected<std::unique_ptr<DataHandler>, string> create(const string& filePath);
 
 private:
-    explicit XmlDataHandler(const pugi::xml_document& doc);
-
     std::vector<Employee> m_employees;
     double m_totalSalaries;
     Employee m_highestIncome;

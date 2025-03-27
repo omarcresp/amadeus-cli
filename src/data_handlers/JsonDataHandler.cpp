@@ -27,7 +27,7 @@ std::expected<std::unique_ptr<DataHandler>, string> JsonDataHandler::create(cons
             return std::unexpected("Error: Missing employees in file");
         }
 
-        return std::unique_ptr<DataHandler>(new JsonDataHandler(jsonData));
+        return std::make_unique<JsonDataHandler>(jsonData);
     } catch (const std::exception& e) {
         return std::unexpected(string("Error creating JsonDataHandler: ") + e.what());
     }
@@ -59,7 +59,7 @@ JsonDataHandler::JsonDataHandler(const nlohmann::json& jsonData) {
     }
 }
 
-JsonDataHandler::~JsonDataHandler() {}
+JsonDataHandler::~JsonDataHandler() = default;
 
 std::expected<void, string> JsonDataHandler::sortWrite(const string& outputPath) {
     if (outputPath.empty()) {
@@ -67,8 +67,7 @@ std::expected<void, string> JsonDataHandler::sortWrite(const string& outputPath)
     }
 
     try {
-        std::sort(m_employees.begin(), m_employees.end(),
-                  [](const Employee& a, const Employee& b) { return a.id < b.id; });
+        std::ranges::sort(m_employees, [](const Employee& a, const Employee& b) { return a.id < b.id; });
 
         nlohmann::json outputJson;
         nlohmann::json employeesArray = nlohmann::json::array();
@@ -90,9 +89,6 @@ std::expected<void, string> JsonDataHandler::sortWrite(const string& outputPath)
         if (!outputFile.is_open()) {
             return std::unexpected("Failed to open output file: " + outputPath);
         }
-
-        char buffer[65536];
-        outputFile.rdbuf()->pubsetbuf(buffer, sizeof(buffer));
 
         outputFile << jsonStr;
         outputFile.close();
@@ -116,7 +112,8 @@ void JsonDataHandler::printMax() {
 }
 
 void JsonDataHandler::printAvg() {
-    double avgSalary = m_totalSalaries / m_employees.size();
+    size_t avgSalary = size_t(m_totalSalaries) / m_employees.size();
+
     std::println("Average salary: {}\n", avgSalary);
 }
 

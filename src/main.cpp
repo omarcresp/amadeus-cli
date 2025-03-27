@@ -35,11 +35,9 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    auto& handler = handlerResult.value();
+    const auto& handler = handlerResult.value();
 
-    auto writeResult = handler->sortWrite(options.output_path);
-
-    if (!writeResult) {
+    if (auto writeResult = handler->sortWrite(options.output_path); !writeResult) {
         std::println(stderr, "{}", writeResult.error());
         return 1;
     }

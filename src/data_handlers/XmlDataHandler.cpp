@@ -14,9 +14,8 @@ namespace amadeus {
 std::expected<std::unique_ptr<DataHandler>, string> XmlDataHandler::create(const string& filePath) {
     try {
         pugi::xml_document doc;
-        pugi::xml_parse_result result = doc.load_file(filePath.c_str());
 
-        if (!result) {
+        if (auto result = doc.load_file(filePath.c_str()); !result) {
             return std::unexpected(string("Error parsing XML file: ") + result.description());
         }
 
@@ -28,7 +27,7 @@ std::expected<std::unique_ptr<DataHandler>, string> XmlDataHandler::create(const
             return std::unexpected(string("Error: Missing employe salary in file: "));
         }
 
-        return std::unique_ptr<DataHandler>(new XmlDataHandler(doc));
+        return std::make_unique<XmlDataHandler>(doc);
     } catch (const std::exception& e) {
         return std::unexpected(string("Error creating XmlDataHandler: ") + e.what());
     }
@@ -62,7 +61,7 @@ XmlDataHandler::XmlDataHandler(const pugi::xml_document& doc) {
     }
 }
 
-XmlDataHandler::~XmlDataHandler() {}
+XmlDataHandler::~XmlDataHandler() = default;
 
 std::expected<void, string> XmlDataHandler::sortWrite(const string& outputPath) {
     if (outputPath.empty()) {
@@ -70,8 +69,7 @@ std::expected<void, string> XmlDataHandler::sortWrite(const string& outputPath) 
     }
 
     try {
-        std::sort(m_employees.begin(), m_employees.end(),
-                  [](const Employee& a, const Employee& b) { return a.id < b.id; });
+        std::ranges::sort(m_employees, [](const Employee& a, const Employee& b) { return a.id < b.id; });
 
         pugi::xml_document doc;
 
@@ -88,9 +86,7 @@ std::expected<void, string> XmlDataHandler::sortWrite(const string& outputPath) 
             employee.append_child("salary").text().set(emp.salary);
         }
 
-        bool saveResult = doc.save_file(outputPath.c_str());
-
-        if (!saveResult) {
+        if (bool saveResult = doc.save_file(outputPath.c_str()); !saveResult) {
             return std::unexpected("Failed to write XML to file: " + outputPath);
         }
 
@@ -109,7 +105,8 @@ void XmlDataHandler::printMax() {
 }
 
 void XmlDataHandler::printAvg() {
-    double avgSalary = m_totalSalaries / m_employees.size();
+    size_t avgSalary = size_t(m_totalSalaries) / m_employees.size();
+
     std::println("Average salary: {}\n", avgSalary);
 }
 
