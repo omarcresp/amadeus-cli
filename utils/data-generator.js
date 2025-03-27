@@ -13,7 +13,7 @@ function generateData(id) {
   const lastname = generateRandomString(8); // generate 8 random letters
   const name = `${firstname} ${lastname}`;
   const department = DEPARTMENTS[Math.floor(Math.random() * DEPARTMENTS.length)];
-  const salary = Math.floor(Math.random() * 1000000) + 30000; // Random salary between 30,000 and 1,300,000
+  const salary = Math.floor(Math.random() * 1000000) + 30000; // Random salary between 30,000 and 1,030,000
 
   return {
     name,

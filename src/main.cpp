@@ -37,6 +37,13 @@ int main(int argc, char** argv) {
 
     auto& handler = handlerResult.value();
 
+    auto writeResult = handler->sortWrite(options.output_path);
+
+    if (!writeResult) {
+        std::println(stderr, "{}", writeResult.error());
+        return 1;
+    }
+
     if (options.print_avg) {
         handler->printAvg();
     }
@@ -45,12 +52,7 @@ int main(int argc, char** argv) {
         handler->printMax();
     }
 
-    auto writeResult = handler->sortWrite(options.output_path);
-
-    if (!writeResult) {
-        std::println(stderr, "{}", writeResult.error());
-        return 1;
-    }
+    std::print("XML handler - Wrote sorted employees to: {}", options.output_path);
 
     return 0;
 }

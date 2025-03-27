@@ -1,5 +1,6 @@
 #include "amadeus/data_handlers/XmlDataHandler.hpp"
 
+#include <algorithm>
 #include <expected>
 #include <memory>
 #include <print>
@@ -64,10 +65,36 @@ std::expected<void, string> XmlDataHandler::sortWrite(const string& outputPath) 
         return std::unexpected("Error: outputPath is empty");
     }
 
-    std::println("\nXML handler - sortWrite: pending to implement");
-    std::print("Output path: {}", outputPath);
+    try {
+        std::vector<Employee> sortedEmployees = m_employees;
+        std::sort(sortedEmployees.begin(), sortedEmployees.end(),
+                  [](const Employee& a, const Employee& b) { return a.id < b.id; });
 
-    return {};
+        pugi::xml_document doc;
+
+        doc.append_child(pugi::node_declaration).append_attribute("version") = "1.0";
+
+        pugi::xml_node employees = doc.append_child("employees");
+
+        for (const auto& emp : sortedEmployees) {
+            pugi::xml_node employee = employees.append_child("employee");
+
+            employee.append_child("name").text().set(emp.name.c_str());
+            employee.append_child("id").text().set(emp.id);
+            employee.append_child("department").text().set(emp.department.c_str());
+            employee.append_child("salary").text().set(emp.salary);
+        }
+
+        bool saveResult = doc.save_file(outputPath.c_str());
+
+        if (!saveResult) {
+            return std::unexpected("Failed to write XML to file: " + outputPath);
+        }
+
+        return {};
+    } catch (const std::exception& e) {
+        return std::unexpected(string("Error in sortWrite: ") + e.what());
+    }
 }
 
 void XmlDataHandler::printMax() {
@@ -75,7 +102,7 @@ void XmlDataHandler::printMax() {
     std::println("ID: {}", m_highestIncome.id);
     std::println("Name: {}", m_highestIncome.name);
     std::println("Department: {}", m_highestIncome.department);
-    std::println("Salary: {}", m_highestIncome.salary);
+    std::println("Salary: {}\n", m_highestIncome.salary);
 }
 
 void XmlDataHandler::printAvg() {
