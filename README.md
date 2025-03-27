@@ -2,6 +2,9 @@
 
 A robust CLI tool framework for internal use.
 
+## Sonar Cloud Analysis
+![image](https://github.com/user-attachments/assets/e909f9e8-9f0f-46ec-a8f5-481e19f1d6c1)
+
 ## Quick Start with Nix (Recommended)
 
 Quick use the cli using nix flake
