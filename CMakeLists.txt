@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.14)
 # Enable compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Enable compiler optimizations (C -O3 equivalent)
+set(CMAKE_BUILD_TYPE Release)
+
 # Include custom modules
 include(cmake/GitVersion.cmake)
 
