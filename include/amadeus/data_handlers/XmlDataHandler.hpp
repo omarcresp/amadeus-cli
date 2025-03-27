@@ -2,6 +2,7 @@
 
 #include <expected>
 #include <memory>
+#include <pugixml.hpp>
 #include <string>
 #include <vector>
 
@@ -20,12 +21,10 @@ public:
 
     void printAvg() override;
 
-    // Static factory method that returns std::expected
     [[nodiscard]] static std::expected<std::unique_ptr<DataHandler>, std::string> create(const std::string& filePath);
 
 private:
-    // Private constructor to enforce factory method
-    explicit XmlDataHandler(const std::string& filePath);
+    explicit XmlDataHandler(const pugi::xml_document& doc);
 
     std::vector<Employee> m_employees;
     double m_totalSalaries;

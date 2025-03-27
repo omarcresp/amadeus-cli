@@ -1,30 +1,31 @@
 #include "amadeus/data_handlers/XmlDataHandler.hpp"
 
 #include <expected>
-#include <fstream>
 #include <memory>
 #include <print>
+#include <pugixml.hpp>
+
+using std::string;
 
 namespace amadeus {
 
-std::expected<std::unique_ptr<DataHandler>, std::string> XmlDataHandler::create(const std::string& filePath) {
+std::expected<std::unique_ptr<DataHandler>, string> XmlDataHandler::create(const string& filePath) {
     try {
-        // Check if file exists and is readable
-        std::ifstream file(filePath);
-        if (!file.is_open()) {
-            return std::unexpected("Error: Cannot open file: " + filePath);
+        pugi::xml_document doc;
+        pugi::xml_parse_result result = doc.load_file(filePath.c_str());
+
+        if (!result) {
+            std::println("XML parse error: {}", result.description());
         }
 
-        // Create a handler and return it wrapped in a unique_ptr
-        return std::unique_ptr<DataHandler>(new XmlDataHandler(filePath));
+        return std::unique_ptr<DataHandler>(new XmlDataHandler(doc));
     } catch (const std::exception& e) {
-        return std::unexpected(std::string("Error creating XmlDataHandler: ") + e.what());
+        return std::unexpected(string("Error creating XmlDataHandler: ") + e.what());
     }
 }
 
-XmlDataHandler::XmlDataHandler(const std::string& filePath) {
-    // TODO: Implement loading from the XML file
-    (void)filePath;
+XmlDataHandler::XmlDataHandler(const pugi::xml_document& doc) {
+    (void)doc;
 
     m_employees = {Employee{"John Doe", 1, "Engineering", 75000.0}, Employee{"Jane Smith", 2, "HR", 65000.0},
                    Employee{"Bob Wilson", 3, "Marketing", 70000.0}};
@@ -34,7 +35,7 @@ XmlDataHandler::XmlDataHandler(const std::string& filePath) {
 
 XmlDataHandler::~XmlDataHandler() {}
 
-std::expected<void, std::string> XmlDataHandler::sortWrite(const std::string& outputPath) {
+std::expected<void, string> XmlDataHandler::sortWrite(const string& outputPath) {
     if (outputPath.empty()) {
         return std::unexpected("Error: outputPath is empty");
     }
@@ -46,8 +47,6 @@ std::expected<void, std::string> XmlDataHandler::sortWrite(const std::string& ou
 }
 
 void XmlDataHandler::printMax() {
-    // Assert highestIncome field is defined
-
     std::println("Higher income employee");
     std::println("ID: {}", m_highestIncome.id);
     std::println("Name: {}", m_highestIncome.name);

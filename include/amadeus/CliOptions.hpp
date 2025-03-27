@@ -3,7 +3,6 @@
 #include <CLI/CLI.hpp>
 #include <filesystem>
 #include <string>
-#include <vector>
 
 #include "amadeus/Constants.hpp"
 

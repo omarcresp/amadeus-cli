@@ -15,6 +15,7 @@ target_link_libraries(amadeus-cli
     PRIVATE 
     CLI11::CLI11
     nlohmann_json::nlohmann_json
+    pugixml
 )
 
 # Set output directory

@@ -44,7 +44,7 @@ if(NOT CLI11_FOUND)
     FetchContent_Declare(
         cli11
         GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
-        GIT_TAG v2.4.2
+        GIT_TAG v2.5.0
     )
     FetchContent_MakeAvailable(cli11)
 endif()
@@ -59,6 +59,18 @@ if(NOT nlohmann_json_FOUND)
         GIT_TAG v3.11.3
     )
     FetchContent_MakeAvailable(nlohmann_json)
+endif()
+
+# Add pugixml
+find_package(pugixml 1.15 CONFIG)
+if(NOT pugixml_FOUND)
+    include(FetchContent)
+    FetchContent_Declare(
+        pugixml
+        GIT_REPOSITORY https://github.com/zeux/pugixml.git
+        GIT_TAG v1.15
+    )
+    FetchContent_MakeAvailable(pugixml)
 endif()
 
 # Set up versioning - create version header from template

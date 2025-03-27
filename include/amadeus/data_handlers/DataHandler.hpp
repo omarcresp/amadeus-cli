@@ -3,9 +3,6 @@
 #include <expected>
 #include <memory>
 #include <string>
-#include <vector>
-
-#include "amadeus/Employee.hpp"
 
 namespace amadeus {
 
