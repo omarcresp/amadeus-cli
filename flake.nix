@@ -87,11 +87,6 @@
         };
 
         apps = {
-          default = {
-            type = "app";
-            program = toString (amadeus-cli);
-          };
-
           test = {
             type = "app";
             program = toString (pkgs.writeShellScript "run-tests" ''
