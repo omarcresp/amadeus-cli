@@ -9,9 +9,11 @@
 #include <print>
 #include <stdexcept>
 
+using std::string;
+
 namespace amadeus {
 
-std::expected<std::unique_ptr<DataHandler>, std::string> JsonDataHandler::create(const std::string& filePath) {
+std::expected<std::unique_ptr<DataHandler>, string> JsonDataHandler::create(const string& filePath) {
     try {
         std::ifstream file(filePath);
 
@@ -35,7 +37,7 @@ std::expected<std::unique_ptr<DataHandler>, std::string> JsonDataHandler::create
 
         return std::unique_ptr<DataHandler>(new JsonDataHandler(jsonData));
     } catch (const std::exception& e) {
-        return std::unexpected(std::string("Error creating JsonDataHandler: ") + e.what());
+        return std::unexpected(string("Error creating JsonDataHandler: ") + e.what());
     }
 }
 
@@ -48,9 +50,9 @@ JsonDataHandler::JsonDataHandler(const nlohmann::json& jsonData) {
     for (const auto& emp : employeesList) {
         Employee employee;
 
-        employee.name = emp["name"].get<std::string>();
+        employee.name = emp["name"].get<string>();
         employee.id = emp["id"].get<int>();
-        employee.department = emp["department"].get<std::string>();
+        employee.department = emp["department"].get<string>();
         employee.salary = emp["salary"].get<double>();
 
         m_employees.push_back(employee);
@@ -68,7 +70,7 @@ JsonDataHandler::JsonDataHandler(const nlohmann::json& jsonData) {
 
 JsonDataHandler::~JsonDataHandler() {}
 
-std::expected<void, std::string> JsonDataHandler::sortWrite(const std::string& outputPath) {
+std::expected<void, string> JsonDataHandler::sortWrite(const string& outputPath) {
     if (outputPath.empty()) {
         return std::unexpected("Error: outputPath is empty");
     }
@@ -107,7 +109,7 @@ std::expected<void, std::string> JsonDataHandler::sortWrite(const std::string& o
 
         return {};
     } catch (const std::exception& e) {
-        return std::unexpected(std::string("Error in sortWrite: ") + e.what());
+        return std::unexpected(string("Error in sortWrite: ") + e.what());
     }
 }
 

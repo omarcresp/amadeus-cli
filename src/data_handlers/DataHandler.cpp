@@ -7,11 +7,13 @@
 #include "amadeus/data_handlers/JsonDataHandler.hpp"
 #include "amadeus/data_handlers/XmlDataHandler.hpp"
 
+using std::string;
+
 namespace amadeus {
 
-std::expected<std::unique_ptr<DataHandler>, std::string> DataHandler::createHandler(const std::string& filePath) {
+std::expected<std::unique_ptr<DataHandler>, string> DataHandler::createHandler(const string& filePath) {
     std::filesystem::path path(filePath);
-    std::string extension = path.extension().string();
+    string extension = path.extension().string();
 
     if (!extension.empty() && extension[0] == '.') {
         extension = extension.substr(1);

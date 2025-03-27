@@ -3,12 +3,14 @@
 #include <string>
 #include <vector>
 
+using std::string;
+
 namespace amadeus {
 
-const std::vector<std::string> ALLOWED_FILE_FORMATS = {"xml", "json"};
+const std::vector<string> ALLOWED_FILE_FORMATS = {"xml", "json"};
 
-inline std::string join_formats(const std::vector<std::string>& formats) {
-    std::string result;
+inline string join_formats(const std::vector<string>& formats) {
+    string result;
     for (size_t i = 0; i < formats.size(); ++i) {
         if (i > 0)
             result += ", ";

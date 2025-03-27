@@ -1,5 +1,3 @@
-#pragma once
-
 #include <expected>
 #include <memory>
 #include <nlohmann/json.hpp>
@@ -9,15 +7,17 @@
 #include "amadeus/Employee.hpp"
 #include "amadeus/data_handlers/DataHandler.hpp"
 
+using std::string;
+
 namespace amadeus {
 
 class JsonDataHandler : public DataHandler {
 public:
     ~JsonDataHandler() override;
 
-    [[nodiscard]] static std::expected<std::unique_ptr<DataHandler>, std::string> create(const std::string& filePath);
+    [[nodiscard]] static std::expected<std::unique_ptr<DataHandler>, string> create(const string& filePath);
 
-    [[nodiscard]] std::expected<void, std::string> sortWrite(const std::string& outputPath) override;
+    [[nodiscard]] std::expected<void, string> sortWrite(const string& outputPath) override;
 
     void printMax() override;
 
