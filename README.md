@@ -43,26 +43,27 @@ If you prefer not to use Nix, you can build and run the project directly. This m
 - Linux operating system
 - clang-format (for code formatting)
 - Just command runner (for simplified workflow)
+- Node.js
 
 ### Installing Dependencies
 #### Ubuntu/Debian
 ```bash
 sudo apt update
-sudo apt install cmake build-essential libcli11-dev libgtest-dev clang-format
+sudo apt install cmake build-essential libcli11-dev libgtest-dev clang-format nodejs
 # Install Just command runner
 curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
 ```
 
 #### Fedora
 ```bash
-sudo dnf install cmake gcc-c++ cli11-devel gtest-devel clang-tools-extra
+sudo dnf install cmake gcc-c++ cli11-devel gtest-devel clang-tools-extra nodejs
 # Install Just command runner
 curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
 ```
 
 #### Arch Linux
 ```bash
-sudo pacman -S cmake base-devel cli11 gtest clang just
+sudo pacman -S cmake base-devel cli11 gtest clang just nodejs
 ```
 
 ### Using Just Commands
@@ -83,6 +84,9 @@ just format
 
 # Check code formatting
 just format-check
+
+# Generates data
+just gen-data output/path/file.json 1000
 
 # Run the CLI
 just run

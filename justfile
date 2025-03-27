@@ -29,6 +29,11 @@ format:
 format-check:
     clang-format -n -Werror -style=file $(find src include test -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
 
+# Generate test data in json
+[positional-arguments]
+@gen-data path amount='10':
+    node ./utils/data-generator.js $1 $2
+
 # Install pre-commit hooks
 hooks:
     pre-commit install

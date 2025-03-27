@@ -30,6 +30,7 @@
           git
           pre-commit
           just
+          nodejs_22
         ];
 
       in {
@@ -68,11 +69,11 @@
             echo "Amadeus CLI Development Shell"
             echo ""
             echo "Available commands (run 'just --list' for more):"
-            echo "  just build         # Configure and build the project"
-            echo "  just test          # Run tests"
-            echo "  just run [args]    # Run the CLI tool"
-            echo "  just format        # Format code"
-            echo "  just check-format  # Check code formatting"
+            echo "  just build          # Configure and build the project"
+            echo "  just test           # Run tests"
+            echo "  just run            # Run the CLI tool"
+            echo "  just format         # Format code"
+            echo "  just check-format   # Check code formatting"
             echo ""
 
             # Setup pre-commit hooks if not already installed
