@@ -56,6 +56,10 @@ XmlDataHandler::XmlDataHandler(const pugi::xml_document& doc) {
             m_highestIncome = item;
         }
     }
+
+    if (!m_employees.size()) {
+        throw new std::invalid_argument("Employees list is empty");
+    }
 }
 
 XmlDataHandler::~XmlDataHandler() {}

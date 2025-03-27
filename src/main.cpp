@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
         handler->printMax();
     }
 
-    std::print("XML handler - Wrote sorted employees to: {}", options.output_path);
+    std::print("Amadeus CLI - Wrote sorted employees to: {}", options.output_path);
 
     return 0;
 }
