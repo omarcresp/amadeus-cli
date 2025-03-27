@@ -14,7 +14,7 @@ function generateData(id) {
   const name = `${firstname} ${lastname}`;
   const department = DEPARTMENTS[Math.floor(Math.random() * DEPARTMENTS.length)];
   const salary = Math.floor(Math.random() * 1000000) + 30000; // Random salary between 30,000 and 1,300,000
-  
+
   return {
     name,
     id,
@@ -23,26 +23,57 @@ function generateData(id) {
   };
 }
 
+// Convert JSON data to XML format
+function jsonToXml(data) {
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<employees>\n';
+  
+  data.employees.forEach(employee => {
+    xml += '  <employee>\n';
+    xml += `    <name>${employee.name}</name>\n`;
+    xml += `    <id>${employee.id}</id>\n`;
+    xml += `    <department>${employee.department}</department>\n`;
+    xml += `    <salary>${employee.salary}</salary>\n`;
+    xml += '  </employee>\n';
+  });
+  
+  xml += '</employees>';
+  return xml;
+}
+
 function main(outputPath, amount = 100) {
   const data = {
     employees: []
   };
-  
+
+  const randomOffset = ~~(Math.random() * amount);
+
   for (let i = 1; i <= amount; i++) {
-    data.employees.push(generateData(i));
+    data.employees.push(generateData((i + randomOffset) % amount + 1));
   }
-  
+
   const outputDir = path.dirname(outputPath);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
+
+  // Determine file format based on extension
+  const fileExtension = path.extname(outputPath).toLowerCase();
   
-  // Write data to file
-  fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
-  console.log(`Generated ${amount} employee records and saved to ${outputPath}`);
+  if (fileExtension === '.xml') {
+    // Write XML data to file
+    const xmlData = jsonToXml(data);
+    fs.writeFileSync(outputPath, xmlData);
+    console.log(`Generated ${amount} employee records and saved as XML to ${outputPath}`);
+  } else if (fileExtension === '.json') {
+    // Write JSON data to file
+    fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
+    console.log(`Generated ${amount} employee records and saved as JSON to ${outputPath}`);
+  } else {
+    console.error('Unsupported file extension. Please use .json or .xml');
+    process.exit(1);
+  }
 }
 
-console.log(process.argv.toString());
 const args = process.argv.slice(2);
 if (args.length === 0) {
   console.error('Usage: node data-generator.js <output-path> [amount]');
