@@ -1,14 +1,33 @@
 #include "amadeus/data_handlers/JsonDataHandler.hpp"
 
 #include <expected>
+#include <fstream>
+#include <memory>
+#include <nlohmann/json.hpp>
 #include <print>
 
 namespace amadeus {
 
-JsonDataHandler::JsonDataHandler(const std::string& filePath) {
-    // TODO: Implement loading from the JSON file
-    (void)filePath;
+std::expected<std::unique_ptr<DataHandler>, std::string> JsonDataHandler::create(const std::string& filePath) {
+    try {
+        std::ifstream file(filePath);
 
+        if (!file.is_open()) {
+            return std::unexpected("Error: Cannot open file: " + filePath);
+        }
+
+        nlohmann::json jsonData = nlohmann::json::parse(file);
+
+        return std::unique_ptr<DataHandler>(new JsonDataHandler(jsonData));
+    } catch (const std::exception& e) {
+        return std::unexpected(std::string("Error creating JsonDataHandler: ") + e.what());
+    }
+}
+
+JsonDataHandler::JsonDataHandler(const nlohmann::json& jsonData) {
+    (void)jsonData;  // Silence unused variable warning
+
+    // Keep the existing mock data for now
     m_employees = {Employee{"John Doe", 1, "Engineering", 75000.0}, Employee{"Jane Smith", 2, "HR", 65000.0},
                    Employee{"Bob Wilson", 3, "Marketing", 70000.0}};
     m_totalSalaries = 210000.0;

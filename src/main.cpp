@@ -28,11 +28,14 @@ int main(int argc, char** argv) {
         return app.exit(e);
     }
 
-    std::unique_ptr<amadeus::DataHandler> handler(amadeus::DataHandler::createHandler(options.file_path));
+    auto handlerResult = amadeus::DataHandler::createHandler(options.file_path);
 
-    if (!handler) {
+    if (!handlerResult) {
+        std::println(stderr, "Error: {}", handlerResult.error());
         return 1;
     }
+
+    auto& handler = handlerResult.value();
 
     if (options.print_avg) {
         handler->printAvg();
@@ -44,9 +47,8 @@ int main(int argc, char** argv) {
 
     auto writeResult = handler->sortWrite(options.output_path);
 
-    if (!writeResult.error().empty()) {
+    if (!writeResult) {
         std::println(stderr, "{}", writeResult.error());
-
         return 1;
     }
 

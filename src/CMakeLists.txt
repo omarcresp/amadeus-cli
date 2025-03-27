@@ -14,6 +14,7 @@ target_include_directories(amadeus-cli
 target_link_libraries(amadeus-cli 
     PRIVATE 
     CLI11::CLI11
+    nlohmann_json::nlohmann_json
 )
 
 # Set output directory

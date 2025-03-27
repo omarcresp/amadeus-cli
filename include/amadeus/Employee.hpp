@@ -2,13 +2,15 @@
 
 #include <string>
 
+using std::string;
+
 namespace amadeus {
 
 // New simple struct version
 struct Employee {
-    std::string name;
+    string name;
     int id;
-    std::string department;
+    string department;
     double salary;
 };
 

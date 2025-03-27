@@ -1,9 +1,26 @@
 #include "amadeus/data_handlers/XmlDataHandler.hpp"
 
 #include <expected>
+#include <fstream>
+#include <memory>
 #include <print>
 
 namespace amadeus {
+
+std::expected<std::unique_ptr<DataHandler>, std::string> XmlDataHandler::create(const std::string& filePath) {
+    try {
+        // Check if file exists and is readable
+        std::ifstream file(filePath);
+        if (!file.is_open()) {
+            return std::unexpected("Error: Cannot open file: " + filePath);
+        }
+
+        // Create a handler and return it wrapped in a unique_ptr
+        return std::unique_ptr<DataHandler>(new XmlDataHandler(filePath));
+    } catch (const std::exception& e) {
+        return std::unexpected(std::string("Error creating XmlDataHandler: ") + e.what());
+    }
+}
 
 XmlDataHandler::XmlDataHandler(const std::string& filePath) {
     // TODO: Implement loading from the XML file

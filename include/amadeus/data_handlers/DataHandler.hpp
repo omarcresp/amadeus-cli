@@ -1,6 +1,7 @@
 #pragma once
 
 #include <expected>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -18,7 +19,8 @@ public:
 
     virtual void printAvg() = 0;
 
-    static DataHandler* createHandler(const std::string& filePath);
+    [[nodiscard]] static std::expected<std::unique_ptr<DataHandler>, std::string> createHandler(
+        const std::string& filePath);
 };
 
 }  // namespace amadeus

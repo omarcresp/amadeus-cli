@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
 
+# Enable compile_commands.json generation
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Include custom modules
 include(cmake/GitVersion.cmake)
 
@@ -41,9 +44,21 @@ if(NOT CLI11_FOUND)
     FetchContent_Declare(
         cli11
         GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
-        GIT_TAG v2.3.2
+        GIT_TAG v2.4.2
     )
     FetchContent_MakeAvailable(cli11)
+endif()
+
+# Add nlohmann/json
+find_package(nlohmann_json 3.11.3 CONFIG)
+if(NOT nlohmann_json_FOUND)
+    include(FetchContent)
+    FetchContent_Declare(
+        nlohmann_json
+        GIT_REPOSITORY https://github.com/nlohmann/json.git
+        GIT_TAG v3.11.3
+    )
+    FetchContent_MakeAvailable(nlohmann_json)
 endif()
 
 # Set up versioning - create version header from template

@@ -1,6 +1,7 @@
 #include "amadeus/data_handlers/DataHandler.hpp"
 
 #include <filesystem>
+#include <memory>
 #include <print>
 
 #include "amadeus/data_handlers/JsonDataHandler.hpp"
@@ -8,7 +9,7 @@
 
 namespace amadeus {
 
-DataHandler* DataHandler::createHandler(const std::string& filePath) {
+std::expected<std::unique_ptr<DataHandler>, std::string> DataHandler::createHandler(const std::string& filePath) {
     std::filesystem::path path(filePath);
     std::string extension = path.extension().string();
 
@@ -17,16 +18,14 @@ DataHandler* DataHandler::createHandler(const std::string& filePath) {
     }
 
     if (extension == "xml") {
-        return new XmlDataHandler(path);
+        return XmlDataHandler::create(path.string());
     }
 
     if (extension == "json") {
-        return new JsonDataHandler(path);
+        return JsonDataHandler::create(path.string());
     }
 
-    std::println(stderr, "Unsupported file type: {}", extension);
-
-    return nullptr;
+    return std::unexpected("Unsupported file type: " + extension);
 }
 
 }  // namespace amadeus

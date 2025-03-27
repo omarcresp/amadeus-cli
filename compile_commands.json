@@ -1,26 +1,56 @@
 [
 {
   "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/src",
-  "command": "/etc/profiles/per-user/jackcres/bin/c++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -isystem /nix/store/3gfx040lcywpih8c22x3979vwy8xmq2i-cli11-2.4.2/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/main.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/main.cpp",
+  "command": "/nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/nlohmann_json-src/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/cli11-src/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/main.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/main.cpp",
   "file": "/home/jackcres/Programming/technical-test/amadeus-cli/src/main.cpp",
   "output": "src/CMakeFiles/amadeus-cli.dir/main.cpp.o"
 },
 {
   "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/src",
-  "command": "/etc/profiles/per-user/jackcres/bin/c++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -isystem /nix/store/3gfx040lcywpih8c22x3979vwy8xmq2i-cli11-2.4.2/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/data_handlers/DataHandler.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/DataHandler.cpp",
+  "command": "/nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/nlohmann_json-src/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/cli11-src/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/data_handlers/DataHandler.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/DataHandler.cpp",
   "file": "/home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/DataHandler.cpp",
   "output": "src/CMakeFiles/amadeus-cli.dir/data_handlers/DataHandler.cpp.o"
 },
 {
   "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/src",
-  "command": "/etc/profiles/per-user/jackcres/bin/c++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -isystem /nix/store/3gfx040lcywpih8c22x3979vwy8xmq2i-cli11-2.4.2/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/data_handlers/XmlDataHandler.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/XmlDataHandler.cpp",
+  "command": "/nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/nlohmann_json-src/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/cli11-src/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/data_handlers/XmlDataHandler.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/XmlDataHandler.cpp",
   "file": "/home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/XmlDataHandler.cpp",
   "output": "src/CMakeFiles/amadeus-cli.dir/data_handlers/XmlDataHandler.cpp.o"
 },
 {
   "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/src",
-  "command": "/etc/profiles/per-user/jackcres/bin/c++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -isystem /nix/store/3gfx040lcywpih8c22x3979vwy8xmq2i-cli11-2.4.2/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/data_handlers/JsonDataHandler.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/JsonDataHandler.cpp",
+  "command": "/nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/src -I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/nlohmann_json-src/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/cli11-src/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/amadeus-cli.dir/data_handlers/JsonDataHandler.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/JsonDataHandler.cpp",
   "file": "/home/jackcres/Programming/technical-test/amadeus-cli/src/data_handlers/JsonDataHandler.cpp",
   "output": "src/CMakeFiles/amadeus-cli.dir/data_handlers/JsonDataHandler.cpp.o"
+},
+{
+  "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/test",
+  "command": "/nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/cli11-src/include  -Wall -Wextra -Wpedantic -Werror -std=c++23 -o CMakeFiles/cli_test.dir/cli_test.cpp.o -c /home/jackcres/Programming/technical-test/amadeus-cli/test/cli_test.cpp",
+  "file": "/home/jackcres/Programming/technical-test/amadeus-cli/test/cli_test.cpp",
+  "output": "test/CMakeFiles/cli_test.dir/cli_test.cpp.o"
+},
+{
+  "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-build/googlemock",
+  "command": "/nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googlemock/include -I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googlemock -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest  -Wall -Wextra -Wpedantic -Werror -std=c++23 -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googlemock/src/gmock-all.cc",
+  "file": "/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googlemock/src/gmock-all.cc",
+  "output": "_deps/googletest-build/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o"
+},
+{
+  "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-build/googlemock",
+  "command": "/nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googlemock/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googlemock -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest  -Wall -Wextra -Wpedantic -Werror -std=c++23 -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googlemock/src/gmock_main.cc",
+  "file": "/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googlemock/src/gmock_main.cc",
+  "output": "_deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
+},
+{
+  "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-build/googletest",
+  "command": "/nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest/include -I/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest  -Wall -Wextra -Wpedantic -Werror -std=c++23 -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest/src/gtest-all.cc",
+  "file": "/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest/src/gtest-all.cc",
+  "output": "_deps/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o"
+},
+{
+  "directory": "/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-build/googletest",
+  "command": "/nix/store/8v6k283dpbc0qkdq81nb6mrxrgcb10i1-gcc-wrapper-14-20241116/bin/g++  -I/home/jackcres/Programming/technical-test/amadeus-cli/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest/include -isystem /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest  -Wall -Wextra -Wpedantic -Werror -std=c++23 -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest/src/gtest_main.cc",
+  "file": "/home/jackcres/Programming/technical-test/amadeus-cli/build/_deps/googletest-src/googletest/src/gtest_main.cc",
+  "output": "_deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o"
 }
 ]
