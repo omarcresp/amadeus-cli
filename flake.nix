@@ -20,6 +20,9 @@
           cmake
           ninja
           gtest
+          cli11
+          nlohmann_json
+          pugixml
         ];
 
         # Development shell additional inputs
@@ -33,9 +36,7 @@
           nodejs_22
         ];
 
-      in {
-        # Default package (production build)
-        packages.default = pkgs.stdenv.mkDerivation {
+        amadeus-cli = pkgs.stdenv.mkDerivation {
           pname = "amadeus-cli";
           version = finalVersion;
           src = ./.;
@@ -61,7 +62,9 @@
           };
         };
 
-        # Development shell
+      in {
+        packages.default = amadeus-cli;
+
         devShells.default = pkgs.mkShell {
           buildInputs = commonInputs ++ devInputs;
 
@@ -83,28 +86,12 @@
           '';
         };
 
-        # Apps
         apps = {
-          # Default app
           default = {
             type = "app";
-            program = toString (pkgs.writeShellScript "run-amadeus-cli" ''
-              # Suppress output unless there's an error
-              if ! cmake -B build -DBUILD_TESTS=OFF > /dev/null 2>&1; then
-                echo "Build configuration failed"
-                exit 1
-              fi
-
-              if ! cmake --build build > /dev/null 2>&1; then
-                echo "Build failed"
-                exit 1
-              fi
-
-              ./build/bin/amadeus-cli "$@"
-            '');
+            program = toString (amadeus-cli);
           };
 
-          # Test runner
           test = {
             type = "app";
             program = toString (pkgs.writeShellScript "run-tests" ''
@@ -116,7 +103,6 @@
             '');
           };
 
-          # Format code
           format = {
             type = "app";
             program = toString (pkgs.writeShellScript "format-code" ''
@@ -126,7 +112,6 @@
             '');
           };
 
-          # Check formatting
           format-check = {
             type = "app";
             program = toString (pkgs.writeShellScript "check-format" ''
