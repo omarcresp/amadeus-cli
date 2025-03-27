@@ -49,4 +49,5 @@ install_manifest.txt
 
 # Generated files
 data/employees_*
+data/employees*result*
 include/amadeus/Version.h 
