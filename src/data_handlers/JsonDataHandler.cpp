@@ -27,14 +27,6 @@ std::expected<std::unique_ptr<DataHandler>, string> JsonDataHandler::create(cons
             return std::unexpected("Error: Missing employees in file");
         }
 
-        // Validate structure
-        for (const auto& emp : jsonData["employees"]) {
-            if (!emp.contains("name") || !emp.contains("id") || !emp.contains("department") ||
-                !emp.contains("salary")) {
-                return std::unexpected("Error: Invalid employee structure in JSON");
-            }
-        }
-
         return std::unique_ptr<DataHandler>(new JsonDataHandler(jsonData));
     } catch (const std::exception& e) {
         return std::unexpected(string("Error creating JsonDataHandler: ") + e.what());
@@ -42,29 +34,28 @@ std::expected<std::unique_ptr<DataHandler>, string> JsonDataHandler::create(cons
 }
 
 JsonDataHandler::JsonDataHandler(const nlohmann::json& jsonData) {
-    m_employees = {};
-    m_totalSalaries = 0;
-
     auto employeesList = jsonData["employees"];
 
-    for (const auto& emp : employeesList) {
-        Employee employee;
+    const size_t employeeCount = employeesList.size();
 
-        employee.name = emp["name"].get<string>();
-        employee.id = emp["id"].get<int>();
-        employee.department = emp["department"].get<string>();
-        employee.salary = emp["salary"].get<double>();
-
-        m_employees.push_back(employee);
-        m_totalSalaries += employee.salary;
-
-        if (m_employees.size() == 1 || employee.salary > m_highestIncome.salary) {
-            m_highestIncome = employee;
-        }
+    if (!employeeCount) {
+        throw std::invalid_argument("Employees list is empty");
     }
 
-    if (!m_employees.size()) {
-        throw new std::invalid_argument("Employees list is empty");
+    m_employees.reserve(employeeCount);
+    m_totalSalaries = 0;
+    m_highestIncome.salary = 0;
+
+    for (const auto& emp : employeesList) {
+        m_employees.emplace_back(emp["name"].get<string>(), emp["id"].get<int>(), emp["department"].get<string>(),
+                                 emp["salary"].get<double>());
+
+        const auto& employee = m_employees.back();
+        m_totalSalaries += employee.salary;
+
+        if (employee.salary > m_highestIncome.salary) {
+            m_highestIncome = employee;
+        }
     }
 }
 
@@ -76,31 +67,34 @@ std::expected<void, string> JsonDataHandler::sortWrite(const string& outputPath)
     }
 
     try {
-        std::vector<Employee> sortedEmployees = m_employees;
-        std::sort(sortedEmployees.begin(), sortedEmployees.end(),
+        std::sort(m_employees.begin(), m_employees.end(),
                   [](const Employee& a, const Employee& b) { return a.id < b.id; });
 
         nlohmann::json outputJson;
         nlohmann::json employeesArray = nlohmann::json::array();
 
-        for (const auto& emp : sortedEmployees) {
+        for (const auto& emp : m_employees) {
             nlohmann::json employee;
             employee["name"] = emp.name;
             employee["id"] = emp.id;
             employee["department"] = emp.department;
             employee["salary"] = emp.salary;
 
-            employeesArray.push_back(employee);
+            employeesArray.push_back(std::move(employee));
         }
 
-        outputJson["employees"] = employeesArray;
+        outputJson["employees"] = std::move(employeesArray);
 
+        const std::string jsonStr = outputJson.dump(2);
         std::ofstream outputFile(outputPath);
         if (!outputFile.is_open()) {
             return std::unexpected("Failed to open output file: " + outputPath);
         }
 
-        outputFile << outputJson.dump(2);
+        char buffer[65536];
+        outputFile.rdbuf()->pubsetbuf(buffer, sizeof(buffer));
+
+        outputFile << jsonStr;
         outputFile.close();
 
         if (outputFile.fail()) {

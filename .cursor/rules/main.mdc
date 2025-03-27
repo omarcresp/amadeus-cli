@@ -10,7 +10,6 @@ alwaysApply: true
 - Prioritize code safety, maintainability, readability, and robust performance.
 - Follow contemporary C++ idioms and focus on clarity and explicit intent.
 - Strictily adhere to the user instructions. DO NOT OVERDO
-- If user ask for things that may considered incomplete DO NOT complete them without confirmation. inform about the gap, maybe put placeholders/quick mocks in the code but never complete the implementations  without confirmation/explict being ask for
 
 ## Language and Style Guidelines
 - **Code Language:** Write all code, comments, documentation, and commit messages in clear, professional English.

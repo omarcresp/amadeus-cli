@@ -37,7 +37,13 @@ std::expected<std::unique_ptr<DataHandler>, string> XmlDataHandler::create(const
 XmlDataHandler::XmlDataHandler(const pugi::xml_document& doc) {
     auto employeesList = doc.child("employees");
 
-    m_employees = {};
+    size_t employeeCount = std::distance(employeesList.begin(), employeesList.end());
+
+    if (!employeeCount) {
+        throw std::invalid_argument("Employees list is empty");
+    }
+
+    m_employees.reserve(employeeCount);
     m_totalSalaries = 0;
     m_highestIncome.salary = 0;
 
@@ -47,18 +53,12 @@ XmlDataHandler::XmlDataHandler(const pugi::xml_document& doc) {
         auto department = employee.child("department").child_value();
         auto salary = std::stod(employee.child("salary").child_value());
 
-        Employee item(name, id, department, salary);
-
-        m_employees.push_back(item);
+        m_employees.emplace_back(name, id, department, salary);
         m_totalSalaries += salary;
 
         if (salary > m_highestIncome.salary) {
-            m_highestIncome = item;
+            m_highestIncome = m_employees.back();
         }
-    }
-
-    if (!m_employees.size()) {
-        throw new std::invalid_argument("Employees list is empty");
     }
 }
 
@@ -70,8 +70,7 @@ std::expected<void, string> XmlDataHandler::sortWrite(const string& outputPath) 
     }
 
     try {
-        std::vector<Employee> sortedEmployees = m_employees;
-        std::sort(sortedEmployees.begin(), sortedEmployees.end(),
+        std::sort(m_employees.begin(), m_employees.end(),
                   [](const Employee& a, const Employee& b) { return a.id < b.id; });
 
         pugi::xml_document doc;
@@ -80,7 +79,7 @@ std::expected<void, string> XmlDataHandler::sortWrite(const string& outputPath) 
 
         pugi::xml_node employees = doc.append_child("employees");
 
-        for (const auto& emp : sortedEmployees) {
+        for (const auto& emp : m_employees) {
             pugi::xml_node employee = employees.append_child("employee");
 
             employee.append_child("name").text().set(emp.name.c_str());
