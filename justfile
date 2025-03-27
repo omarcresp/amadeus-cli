@@ -40,4 +40,4 @@ hooks:
 
 # Clean build artifacts
 clean:
-    rm -rf build/ 
+    rm -rf build/

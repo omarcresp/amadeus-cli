@@ -48,4 +48,5 @@ install_manifest.txt
 .cmake/
 
 # Generated files
+data/employees_*
 include/amadeus/Version.h 

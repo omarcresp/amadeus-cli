@@ -93,4 +93,4 @@ endif()
 # Installation
 install(TARGETS amadeus-cli
     RUNTIME DESTINATION bin
-) 
+)
