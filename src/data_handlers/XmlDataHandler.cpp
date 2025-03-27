@@ -4,6 +4,7 @@
 #include <memory>
 #include <print>
 #include <pugixml.hpp>
+#include <string>
 
 using std::string;
 
@@ -15,7 +16,15 @@ std::expected<std::unique_ptr<DataHandler>, string> XmlDataHandler::create(const
         pugi::xml_parse_result result = doc.load_file(filePath.c_str());
 
         if (!result) {
-            std::println("XML parse error: {}", result.description());
+            return std::unexpected(string("Error parsing XML file: ") + result.description());
+        }
+
+        if (doc.child("employees").empty()) {
+            return std::unexpected(string("Error: Missing employees in file: "));
+        }
+
+        if (doc.child("employees").first_child().child("salary").empty()) {
+            return std::unexpected(string("Error: Missing employe salary in file: "));
         }
 
         return std::unique_ptr<DataHandler>(new XmlDataHandler(doc));
@@ -25,12 +34,27 @@ std::expected<std::unique_ptr<DataHandler>, string> XmlDataHandler::create(const
 }
 
 XmlDataHandler::XmlDataHandler(const pugi::xml_document& doc) {
-    (void)doc;
+    auto employeesList = doc.child("employees");
 
-    m_employees = {Employee{"John Doe", 1, "Engineering", 75000.0}, Employee{"Jane Smith", 2, "HR", 65000.0},
-                   Employee{"Bob Wilson", 3, "Marketing", 70000.0}};
-    m_totalSalaries = 210000.0;
-    m_highestIncome = m_employees[0];
+    m_employees = {};
+    m_totalSalaries = 0;
+    m_highestIncome.salary = 0;
+
+    for (pugi::xml_node employee = employeesList.first_child(); employee; employee = employee.next_sibling()) {
+        auto name = employee.child("name").child_value();
+        auto id = std::stoi(employee.child("id").child_value());
+        auto department = employee.child("department").child_value();
+        auto salary = std::stod(employee.child("salary").child_value());
+
+        Employee item(name, id, department, salary);
+
+        m_employees.push_back(item);
+        m_totalSalaries += salary;
+
+        if (salary > m_highestIncome.salary) {
+            m_highestIncome = item;
+        }
+    }
 }
 
 XmlDataHandler::~XmlDataHandler() {}
