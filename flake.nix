@@ -12,8 +12,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         # Get version from environment or default to 0.0.1
-        version = builtins.getEnv "VERSION";
-        finalVersion = if version != "" then version else "0.0.1";
+        version = "1.0.0";
 
         # Common build inputs for both dev and prod
         commonInputs = with pkgs; [
@@ -38,7 +37,7 @@
 
         amadeus-cli = pkgs.stdenv.mkDerivation {
           pname = "amadeus-cli";
-          version = finalVersion;
+          inherit version;
           src = ./.;
 
           nativeBuildInputs = commonInputs;

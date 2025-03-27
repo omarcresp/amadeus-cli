@@ -4,6 +4,12 @@ A robust CLI tool framework for internal use.
 
 ## Quick Start with Nix (Recommended)
 
+Quick use the cli using nix flake
+
+```bash
+nix run github:omarcresp/amadeus-cli data/employees.json -- -am
+```
+
 The recommended way to build and develop this project is using Nix, which ensures reproducible builds and consistent development environments.
 
 ### Requirements for Nix Setup
